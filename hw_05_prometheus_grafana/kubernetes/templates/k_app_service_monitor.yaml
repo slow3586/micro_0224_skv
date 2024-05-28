@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: k-app-service-monitor
+spec:
+  selector:
+    matchLabels:
+      env: prod
+  endpoints:
+    - interval: 15s
+      port: web
+      path: /actuator/prometheus

@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: hw_05_prometheus_grafana
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: 'jdbc:postgresql://localhost:5432/postgres'
+    username: postgres
+    password: postgres
+server:
+  port: 8000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
