@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: hw_06_security
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: 'jdbc:postgresql://localhost:5434/postgres'
+    username: postgres
+    password: postgres
+  main:
+    web-application-type: reactive
+app:
+  security:
+    token: 12512652346134625624567284624782462798324769321467234698234769823476987324986923462346
+    expiration-minutes: 600
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
