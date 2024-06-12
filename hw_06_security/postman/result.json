@@ -1,0 +1,294 @@
+{
+	"id": "3994845a-2ec0-496b-b06c-ec778aad2e0f",
+	"name": "micro_0224_skv_tests",
+	"timestamp": "2024-06-12T08:30:37.850Z",
+	"collection_id": "20842312-f7af3c88-fa31-406b-9173-8898aafa6472",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 12,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-06-12T08:30:36.947Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "808d6c8c-1c8b-4191-9198-3e8f86f47713",
+			"name": "регистрация пользователя 1",
+			"url": "http://127.0.0.1:49699/api/v1/user",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"200": true
+			},
+			"testPassFailCounts": {
+				"200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"200": true
+				}
+			]
+		},
+		{
+			"id": "f4a8d1db-fdf1-4d0a-b2e3-fe159723d3f9",
+			"name": "проверка, что изменение и получение профиля пользователя недоступно без логина",
+			"url": "http://127.0.0.1:49699/api/v1/user/1",
+			"time": 6,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"403": true
+			},
+			"testPassFailCounts": {
+				"403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"403": true
+				}
+			]
+		},
+		{
+			"id": "cfd06798-a187-4e9c-bae2-dc6d7c0ffd24",
+			"name": "вход пользователя 1",
+			"url": "http://127.0.0.1:49699/api/v1/login",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"200": true,
+				"jwt": true,
+				"jwt2": true
+			},
+			"testPassFailCounts": {
+				"200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"jwt": {
+					"pass": 1,
+					"fail": 0
+				},
+				"jwt2": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"200": true,
+					"jwt": true,
+					"jwt2": true
+				}
+			]
+		},
+		{
+			"id": "df0f2c6e-a2a7-4375-92d9-f468ca1c0847",
+			"name": "изменение профиля пользователя 1",
+			"url": "http://127.0.0.1:49699/api/v1/user/30",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"200": true
+			},
+			"testPassFailCounts": {
+				"200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"200": true
+				}
+			]
+		},
+		{
+			"id": "f7c4c9c9-4631-4513-8cbe-63575342597e",
+			"name": "проверка, что профиль поменялся",
+			"url": "http://127.0.0.1:49699/api/v1/user/30",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"200": true,
+				"changed": true
+			},
+			"testPassFailCounts": {
+				"200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"changed": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				18
+			],
+			"allTests": [
+				{
+					"200": true,
+					"changed": true
+				}
+			]
+		},
+		{
+			"id": "f1ed5ed0-41ec-44e1-9738-4cfb77dc7dcf",
+			"name": "регистрация пользователя 2",
+			"url": "http://127.0.0.1:49699/api/v1/user",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"200": true
+			},
+			"testPassFailCounts": {
+				"200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"200": true
+				}
+			]
+		},
+		{
+			"id": "5e5e3a24-bc85-433c-8cb3-265c640b7b32",
+			"name": "вход пользователя 2",
+			"url": "http://127.0.0.1:49699/api/v1/login",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"200": true,
+				"jwt": true
+			},
+			"testPassFailCounts": {
+				"200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"jwt": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"200": true,
+					"jwt": true
+				}
+			]
+		},
+		{
+			"id": "8c3e65c6-e0d4-4256-a7da-c1e2d43c0d18",
+			"name": "проверка, что пользователь2 не имеет доступа на чтение и редактирование профиля пользователя1.",
+			"url": "http://127.0.0.1:49699/api/v1/user/30",
+			"time": 13,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"403": true
+			},
+			"testPassFailCounts": {
+				"403": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"403": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 95,
+	"collection": {
+		"requests": [
+			{
+				"id": "808d6c8c-1c8b-4191-9198-3e8f86f47713",
+				"method": "POST"
+			},
+			{
+				"id": "f4a8d1db-fdf1-4d0a-b2e3-fe159723d3f9",
+				"method": "GET"
+			},
+			{
+				"id": "cfd06798-a187-4e9c-bae2-dc6d7c0ffd24",
+				"method": "POST"
+			},
+			{
+				"id": "df0f2c6e-a2a7-4375-92d9-f468ca1c0847",
+				"method": "PUT"
+			},
+			{
+				"id": "f7c4c9c9-4631-4513-8cbe-63575342597e",
+				"method": "GET"
+			},
+			{
+				"id": "f1ed5ed0-41ec-44e1-9738-4cfb77dc7dcf",
+				"method": "POST"
+			},
+			{
+				"id": "5e5e3a24-bc85-433c-8cb3-265c640b7b32",
+				"method": "POST"
+			},
+			{
+				"id": "8c3e65c6-e0d4-4256-a7da-c1e2d43c0d18",
+				"method": "GET"
+			}
+		]
+	}
+}
