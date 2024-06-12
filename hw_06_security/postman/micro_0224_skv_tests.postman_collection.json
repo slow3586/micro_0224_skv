@@ -25,7 +25,8 @@
 					"listen": "prerequest",
 					"script": {
 						"exec": [
-							""
+							"pm.collectionVariables.set(\"username\", \"username\"+_.random (1,1000));\r",
+							"pm.collectionVariables.set(\"password\", \"password\"+_.random (1,1000));"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -49,7 +50,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"username1\",\n    \"password\": \"password\",\n    \"firstName\": \"firstName\",\n    \"lastName\": \"lastName\",\n    \"email\": \"email\",\n    \"phone\": \"phone\"\n}",
+					"raw": "{\n    \"username\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"firstName\": \"firstName\",\n    \"lastName\": \"lastName\",\n    \"email\": \"email\",\n    \"phone\": \"phone\"\n}",
 					"options": {
 						"raw": {
 							"headerFamily": "json",
@@ -315,6 +316,10 @@
 							"    pm.expect(pm.response.text()).to.have.length.above(0);\r",
 							"});\r",
 							"\r",
+							"pm.test(\"jwt2\", function () {\r",
+							"    pm.expect(pm.response.text()).to.not.include(\"IncorrectResultSizeDataAccessException\");\r",
+							"});\r",
+							"\r",
 							"pm.collectionVariables.set(\"bearerToken\", pm.response.text());"
 						],
 						"type": "text/javascript",
@@ -339,7 +344,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"username1\",\r\n    \"password\": \"password\"\r\n}",
+					"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
 					"options": {
 						"raw": {
 							"headerFamily": "json",
@@ -457,6 +462,17 @@
 						"type": "text/javascript",
 						"packages": {}
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"username\", \"usernameChange\"+_.random (1,1000));\r",
+							"pm.collectionVariables.set(\"password\", \"passwordChange\"+_.random (1,1000));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
 				}
 			],
 			"request": {
@@ -483,7 +499,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"username\": \"username1_new\",\n  \"password\": \"password\",\n  \"firstName\": \"new\",\n  \"lastName\": \"new\",\n  \"email\": \"new\",\n  \"phone\": \"new\"\n}",
+					"raw": "{\n    \"username\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"firstName\": \"firstName\",\n    \"lastName\": \"lastName\",\n    \"email\": \"email\",\n    \"phone\": \"phone\"\n}",
 					"options": {
 						"raw": {
 							"headerFamily": "json",
@@ -503,7 +519,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1",
+							"value": "{{userId}}",
 							"description": "(Required) ID of user"
 						}
 					]
@@ -629,9 +645,9 @@
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Your test name\", function () {\r",
+							"pm.test(\"changed\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.username).to.eql(\"username1_new\");\r",
+							"    pm.expect(jsonData.username).to.eql(pm.collectionVariables.get(\"username\"));\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -682,7 +698,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "{{userId}}"
 						}
 					]
 				}
@@ -787,6 +803,17 @@
 						"type": "text/javascript",
 						"packages": {}
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"username\", \"usernameNew\"+_.random (1,1000));\r",
+							"pm.collectionVariables.set(\"password\", \"passwordNew\"+_.random (1,1000));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
 				}
 			],
 			"request": {
@@ -806,7 +833,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"username2\",\n    \"password\": \"password\",\n    \"firstName\": \"firstName\",\n    \"lastName\": \"lastName\",\n    \"email\": \"email\",\n    \"phone\": \"phone\"\n}",
+					"raw": "{\n    \"username\": \"{{username}}\",\n    \"password\": \"{{password}}\",\n    \"firstName\": \"firstName\",\n    \"lastName\": \"lastName\",\n    \"email\": \"email\",\n    \"phone\": \"phone\"\n}",
 					"options": {
 						"raw": {
 							"headerFamily": "json",
@@ -949,7 +976,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"username2\",\r\n    \"password\": \"password\"\r\n}",
+					"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
 					"options": {
 						"raw": {
 							"headerFamily": "json",
@@ -1116,7 +1143,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "{{userId}}"
 						}
 					]
 				}
@@ -1233,11 +1260,24 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://127.0.0.1:8080/api/v1",
+			"value": "http://arch.homework/api/v1",
 			"type": "string"
 		},
 		{
 			"key": "bearerToken",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
 			"value": ""
 		}
 	]

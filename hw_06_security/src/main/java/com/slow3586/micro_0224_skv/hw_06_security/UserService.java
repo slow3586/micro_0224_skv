@@ -101,7 +101,12 @@ public class UserService implements UserApiDelegate {
             .publishOn(Schedulers.boundedElastic())
             .filter(u -> userRepository.existsById(u.getId()))
             .switchIfEmpty(Mono.error(new IllegalArgumentException("Not found")))
-            .map(u -> userRepository.save(userMapper.toEntity(u)))
+            .map(userMapper::toEntity)
+            .map(u -> {
+                u.setPassword(passwordEncoder.encode(u.getPassword()));
+                return u;
+            })
+            .map(userRepository::save)
             .thenReturn(ResponseEntity.ok().build());
     }
 }

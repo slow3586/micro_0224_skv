@@ -4,4 +4,4 @@ metadata:
   name: k-app-configmap
 data:
   spring.datasource.url: "jdbc:postgresql://{{ .Values.postgresServicePath }}:{{ .Values.postgresServicePort}}/postgres"
-  server.error.include-message: "always"
+  server.port: "8000"
