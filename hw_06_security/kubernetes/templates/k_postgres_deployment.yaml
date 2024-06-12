@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: k-postgres-deployment
+spec:
+  serviceName: k-postgres-deployment-service
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: k-postgres-deployment-container
+          image: 'postgres:14'
+          resources:
+            limits:
+              memory: "1G"
+              cpu: "1"
+            requests:
+              memory: "1G"
+              cpu: "0.5"
+          envFrom:
+            - secretRef:
+                name: k-postgres-secret
+          ports:
+            - containerPort: {{ .Values.postgresServicePort }}
+          volumeMounts:
+            - name: k-postgres-deployment-container-vol
+              mountPath: /var/lib/postgresql/data
+            - name: k-postgres-configmap-init-vol
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: k-postgres-deployment-container-vol
+          persistentVolumeClaim:
+            claimName: k-postgres-deployment-container-vol-claim
+        - name: k-postgres-configmap-init-vol
+          configMap:
+            name: k-postgres-configmap-init

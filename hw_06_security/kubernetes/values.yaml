@@ -1,0 +1,2 @@
+postgresServicePath: "k-postgres-service"
+postgresServicePort: "5432"
